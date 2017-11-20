@@ -1,2 +1,2 @@
 (require 'org)
-(require 'preview)
+;(require 'preview)
