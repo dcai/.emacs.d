@@ -4,16 +4,34 @@
 ;; You may delete these explanatory comments.
 ;; (package-initialize)
 
+;; some custom consts
+(setq
+  dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name))
+  ;; store emacs configs which are not tracked by git
+  emacs-local-dir "~/.local/emacs"
+  )
+
+(mkdir emacs-local-dir 1)
 ;; emacs config
 (setq
+  init-verbose t ;; message before each loaded file
+  ;; scroll one line at a time (less "jumpy" than defaults)
+  mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time
+  mouse-wheel-progressive-speed nil ;; don't accelerate scrolling
+  mouse-wheel-follow-mouse 't ;; scroll window under mouse
+  scroll-step 1 ;; keyboard scroll one line at a time
+  ;; no tab
+  c-basic-indent 2
+  tab-width 4
+  indent-tabs-mode nil
+  ;; end of no tab
+  make-backup-file nil
   ;; store all backup and autosave files in the tmp dir
   backup-directory-alist `((".*" . ,temporary-file-directory))
+  auto-save-list-file-prefix nil
   auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
-  custom-file "~/.emacs.d/custom.el"
-  inhibit-splash-screen t
-  init-verbose t ;; message before each loaded file
-  dotfiles-dir (file-name-directory (or (buffer-file-name)
-                                        load-file-name))
+  custom-file (expand-file-name "custom.el" emacs-local-dir)
+  recentf-save-file (expand-file-name "recentf" emacs-local-dir)
   hosts-dir (file-name-as-directory (expand-file-name "hosts" dotfiles-dir))
   host-default-dir (file-name-as-directory (expand-file-name "default" hosts-dir))
   hostname (system-name)
@@ -41,6 +59,3 @@
   (when (file-exists-p dir)
     (add-to-list 'load-path dir)
     (mapc #'load (directory-files dir nil ".*el$"))))
-
-;; enable transient mark mode
-(transient-mark-mode 1)

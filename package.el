@@ -1,12 +1,10 @@
 (require 'package)
-(setq package-user-dir "~/.local/emacs/packages")
-(setq package-archives '(
+(setq
+  package-user-dir (expand-file-name "packages" emacs-local-dir)
+  package-archives '(
         ("gnu" . "http://elpa.gnu.org/packages/")
         ("org" . "http://orgmode.org/elpa/")
-        ("melpa" . "http://melpa.org/packages/")
-        ("melpa-stable" . "http://stable.melpa.org/packages/")
-    )
-)
+        ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 ; (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 ; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
@@ -15,14 +13,17 @@
 ; (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
 (setq package-list '(
-        evil
-        ;;evil-leader
-        fzf
-        org
-        ;;timesheet
-        ;;auctex
-    )
-)
+		     gruvbox-theme
+		     php-mode
+		     ibuffer
+		     evil
+		     ;;evil-leader
+		     fzf
+		     org
+		     ;;timesheet
+		     ;;auctex
+		     )
+      )
 
 ;; fetch the list of packages available
 (unless package-archive-contents
