@@ -11,10 +11,12 @@
   emacs-local-dir "~/.local/emacs"
   custom-file (expand-file-name "custom.el" emacs-local-dir)
   )
+(unless (file-exists-p emacs-local-dir)
+      (make-directory emacs-local-dir t))
+
 ;; create custom file is not exists
 (write-region "" nil custom-file)
 
-(mkdir emacs-local-dir 1)
 ;; emacs config
 (setq
   init-verbose t ;; message before each loaded file
@@ -54,6 +56,8 @@
 (init-load (expand-file-name "package.el" dotfiles-dir))
 (init-load (expand-file-name "evil.el" dotfiles-dir))
 (init-load (expand-file-name "org.el" dotfiles-dir))
+;;(init-load (expand-file-name "ido.el" dotfiles-dir))
+(init-load (expand-file-name "helm.el" dotfiles-dir))
 (init-load (expand-file-name custom-file dotfiles-dir))
 
 ;; load any system and user specific files

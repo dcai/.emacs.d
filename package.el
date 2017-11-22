@@ -14,8 +14,8 @@
 
 (setq package-list '(
 		     gruvbox-theme
+		     helm
 		     php-mode
-		     ibuffer
 		     evil
 		     ;;evil-leader
 		     fzf
