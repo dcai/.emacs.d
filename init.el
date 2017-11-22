@@ -36,6 +36,7 @@
   auto-save-list-file-prefix nil
   auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
   recentf-save-file (expand-file-name "recentf" emacs-local-dir)
+  bookmark-default-file (expand-file-name "bookmarks" emacs-local-dir)
   hosts-dir (file-name-as-directory (expand-file-name "hosts" dotfiles-dir))
   host-default-dir (file-name-as-directory (expand-file-name "default" hosts-dir))
   hostname (system-name)
