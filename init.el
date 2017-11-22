@@ -9,7 +9,10 @@
   dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name))
   ;; store emacs configs which are not tracked by git
   emacs-local-dir "~/.local/emacs"
+  custom-file (expand-file-name "custom.el" emacs-local-dir)
   )
+;; create custom file is not exists
+(write-region "" nil custom-file)
 
 (mkdir emacs-local-dir 1)
 ;; emacs config
@@ -30,7 +33,6 @@
   backup-directory-alist `((".*" . ,temporary-file-directory))
   auto-save-list-file-prefix nil
   auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
-  custom-file (expand-file-name "custom.el" emacs-local-dir)
   recentf-save-file (expand-file-name "recentf" emacs-local-dir)
   hosts-dir (file-name-as-directory (expand-file-name "hosts" dotfiles-dir))
   host-default-dir (file-name-as-directory (expand-file-name "default" hosts-dir))
