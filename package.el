@@ -16,6 +16,8 @@
 		     gruvbox-theme
 		     helm
 		     php-mode
+		     org-evil
+		     org-journal
 		     evil
 		     ;;evil-leader
 		     fzf
