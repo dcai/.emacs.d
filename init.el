@@ -6,16 +6,35 @@
 
 ;; some custom consts
 (setq
-  dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name))
-  ;; store emacs configs which are not tracked by git
-  emacs-local-dir "~/.local/emacs"
-  custom-file (expand-file-name "custom.el" emacs-local-dir)
-  )
+ dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name))
+ ;; store emacs configs which are not tracked by git
+ emacs-local-dir "~/.local/share/emacs"
+ custom-file (expand-file-name "custom.el" emacs-local-dir)
+ )
 (unless (file-exists-p emacs-local-dir)
       (make-directory emacs-local-dir t))
-
 ;; create custom file is not exists
 (write-region "" nil custom-file)
+
+;; UTF-8 as default encoding
+(set-language-environment "UTF-8")
+
+(defun reload-init-file ()
+  (interactive)
+  (load-file user-init-file))
+
+(progn
+  ;; Make whitespace-mode with very basic background coloring for whitespaces.
+  ;; http://ergoemacs.org/emacs/whitespace-mode.html
+  (setq whitespace-style (quote (face spaces tabs newline space-mark tab-mark newline-mark )))
+  ;; Make whitespace-mode and whitespace-newline-mode use “¶” for end of line char and “▷” for tab.
+  (setq whitespace-display-mappings
+	;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
+	'(
+	  (space-mark 32 [183] [46]) ; SPACE 32 「 」, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
+	  (newline-mark 10 [182 10]) ; LINE FEED,
+	  (tab-mark 9 [9655 9] [92 9]) ; tab
+	  )))
 
 ;; emacs config
 (setq

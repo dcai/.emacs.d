@@ -2,10 +2,6 @@
 
 (evil-mode 1)
 
-(defun reload-init-file ()
-  (interactive)
-  (load-file user-init-file))
-
 ; (global-evil-leader-mode)
 ; (evil-leader/set-leader "<SPC>")
 ; (global-set-key (kbd "SPC") nil) ;; Remove the old keybinding
