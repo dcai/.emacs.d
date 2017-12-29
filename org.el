@@ -28,7 +28,7 @@
     org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
     org-duration-format (quote h:mm)
     org-log-done t
-    org-tag-alist '(("@work" . ?w) ("@home" . ?h)
+    org-tag-alist '(("@work" . ?w) ("@home" . ?h))
     org-directory "~/Dropbox/Documents/Org/"
     org-default-notes-file (expand-file-name "refile.org" org-directory)
     org-default-journal-file 'get-journal-file-today
