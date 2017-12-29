@@ -1,17 +1,37 @@
 (require 'org)
+
+(defun journal-file-insert ()
+  "Insert's the journal heading based on the file's name."
+  (interactive)
+  (when (string-match "\\(20[0-9][0-9]\\)\\([0-9][0-9]\\)\\([0-9][0-9]\\)"
+                      (buffer-name))
+    (let ((year  (string-to-number (match-string 1 (buffer-name))))
+          (month (string-to-number (match-string 2 (buffer-name))))
+          (day   (string-to-number (match-string 3 (buffer-name))))
+          (datim nil))
+      (setq datim (encode-time 0 0 0 day month year))
+      (insert (format-time-string
+                 "#+TITLE: Journal Entry- %Y-%b-%d (%A)\n#+STARTUP: showeverything" datim)))))
+
+(defun get-journal-file-today ()
+  "Return filename for today's journal entry."
+  (let ((daily-name (format-time-string org-journal-file-format)))
+    (expand-file-name daily-name org-journal-dir)))
+
 ;; org-journal
 (setq
     org-journal-dir "~/Dropbox/Documents/Journal/"
     org-journal-file-format "%Y%m%d.org")
 ;; orgmode
 (setq
+    org-startup-folded nil
     org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
     org-duration-format (quote h:mm)
     org-log-done t
-    org-tag-alist '(("@work" . ?w) ("@home" . ?h) ("work" . ?l))
+    org-tag-alist '(("@work" . ?w) ("@home" . ?h)
     org-directory "~/Dropbox/Documents/Org/"
     org-default-notes-file (expand-file-name "refile.org" org-directory)
-    org-default-journal-file (expand-file-name "journal.org" org-directory)
+    org-default-journal-file 'get-journal-file-today
     org-clock-persist-file (expand-file-name "org-clock-save.el" emacs-local-dir)
     org-clock-persist 'history)
 (setq org-capture-templates
@@ -21,8 +41,12 @@
 	 "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
 	("n" "note" entry (file org-default-notes-file)
 	 "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-	("j" "Journal" entry (file+datetree org-default-journal-file)
-	 "* %?\n%U\n" :clock-in t :clock-resume t)
+	;;("j" "Journal" entry (file+datetree org-default-journal-file)
+	;; "* %?\n%U\n" :clock-in t :clock-resume t)
+	("j" "Journal"
+	 entry (file (get-journal-file-today))
+	 "** Event: %?\n  %i"
+         :empty-lines 1)
 	("w" "org-protocol" entry (file org-default-notes-file)
 	 "* TODO Review %c\n%U\n" :immediate-finish t)
 	("m" "Meeting" entry (file org-default-notes-file)
@@ -38,4 +62,5 @@
 ;; I use C-c c to start capture mode
 (global-set-key (kbd "C-c c") 'org-capture)
 
-
+(add-hook 'find-file-hook 'auto-insert)
+(add-to-list 'auto-mode-alist `(,(expand-file-name org-journal-dir) . journal-file-insert))
