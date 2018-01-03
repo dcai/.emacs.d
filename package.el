@@ -1,6 +1,6 @@
 (require 'package)
 (setq
-  package-user-dir (expand-file-name "packages" emacs-local-dir)
+  package-user-dir (expand-file-name "packages" local-emacs-data-dir)
   package-archives '(
         ("gnu" . "http://elpa.gnu.org/packages/")
         ("org" . "http://orgmode.org/elpa/")

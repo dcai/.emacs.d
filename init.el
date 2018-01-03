@@ -4,18 +4,18 @@
 ;; You may delete these explanatory comments.
 ;; (package-initialize)
 
-;; some custom consts
+;; Some custom consts
 (setq
- dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name))
- ;; store emacs configs which are not tracked by git
- emacs-local-dir "~/.local/share/emacs"
- custom-file (expand-file-name "custom.el" emacs-local-dir)
- )
-(unless (file-exists-p emacs-local-dir)
-      (make-directory emacs-local-dir t))
-;; create custom file is not exists
-(write-region "" nil custom-file)
+    local-emacs-dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name))
+    ;; store emacs configs which are not tracked by git
+    local-emacs-data-dir "~/.local/share/emacs"
+)
 
+;; Save all tempfiles in $TMPDIR/emacs$UID/
+(defconst local-emacs-tmp-dir (expand-file-name (format "emacs%d" (user-uid)) local-emacs-data-dir))
+
+(unless (file-exists-p local-emacs-data-dir)
+      (make-directory local-emacs-data-dir t))
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
 
@@ -38,6 +38,7 @@
 
 ;; emacs config
 (setq
+  custom-file (expand-file-name "custom.el" local-emacs-data-dir)
   init-verbose t ;; message before each loaded file
   ;; scroll one line at a time (less "jumpy" than defaults)
   mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time
@@ -51,20 +52,23 @@
   ;; end of no tab
   make-backup-file nil
   ;; store all backup and autosave files in the tmp dir
-  backup-directory-alist `((".*" . ,temporary-file-directory))
-  auto-save-list-file-prefix nil
-  auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
-  recentf-save-file (expand-file-name "recentf" emacs-local-dir)
-  bookmark-default-file (expand-file-name "bookmarks" emacs-local-dir)
-  hosts-dir (file-name-as-directory (expand-file-name "hosts" dotfiles-dir))
+  ;; backup-directory-alist `((".*" . ,temporary-file-directory))
+  ;; auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
+  ;; auto-save-list-file-prefix nil
+  backup-directory-alist `((".*" . , local-emacs-tmp-dir))
+  auto-save-file-name-transforms `((".*", local-emacs-tmp-dir t))
+  auto-save-list-file-prefix local-emacs-tmp-dir
+
+  recentf-save-file (expand-file-name "recentf" local-emacs-data-dir)
+  bookmark-default-file (expand-file-name "bookmarks" local-emacs-data-dir)
+  hosts-dir (file-name-as-directory (expand-file-name "hosts" local-emacs-dotfiles-dir))
   host-default-dir (file-name-as-directory (expand-file-name "default" hosts-dir))
   hostname (system-name)
   host-specific-dir (file-name-as-directory (expand-file-name hostname hosts-dir))
   ;; wait until hostname is simplified before constructing host-specific-dir
-  users-dir (file-name-as-directory (expand-file-name "users" dotfiles-dir))
+  users-dir (file-name-as-directory (expand-file-name "users" local-emacs-dotfiles-dir))
   user-default-dir (file-name-as-directory (expand-file-name "default" users-dir))
   user-specific-dir (file-name-as-directory (expand-file-name user-login-name users-dir)))
-
 ;; init-load function
 (defun init-load (filename &optional noerror)
   "Load FILENAME and provide message when init-verbose passing in optional NOERROR."
@@ -72,13 +76,16 @@
     (message (format ";; LOAD: %s -------------------------" filename)))
   (load filename noerror))
 
+;; create custom file is not exists
+(write-region "" nil custom-file)
+
 ;; load plugin config
-(init-load (expand-file-name "package.el" dotfiles-dir))
-(init-load (expand-file-name "evil.el" dotfiles-dir))
-(init-load (expand-file-name "org.el" dotfiles-dir))
-;;(init-load (expand-file-name "ido.el" dotfiles-dir))
-(init-load (expand-file-name "helm.el" dotfiles-dir))
-(init-load (expand-file-name custom-file dotfiles-dir))
+(init-load (expand-file-name "package.el" local-emacs-dotfiles-dir))
+(init-load (expand-file-name "evil.el" local-emacs-dotfiles-dir))
+(init-load (expand-file-name "org.el" local-emacs-dotfiles-dir))
+;;(init-load (expand-file-name "ido.el" local-emacs-dotfiles-dir))
+(init-load (expand-file-name "helm.el" local-emacs-dotfiles-dir))
+(init-load (expand-file-name custom-file local-emacs-dotfiles-dir))
 
 ;; load any system and user specific files
 (dolist (dir (list host-default-dir host-specific-dir user-default-dir user-specific-dir))
