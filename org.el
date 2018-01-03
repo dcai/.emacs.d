@@ -18,14 +18,19 @@
   (let ((daily-name (format-time-string org-journal-file-format)))
     (expand-file-name daily-name org-journal-dir)))
 
-;; custom vars
-(setq
-    local-org-data-directory "~/Dropbox/Documents/Org/"
+(if (eq system-type 'windows-nt)
+    (setq
+        local-org-data-directory "e:/Dropbox/Documents/Org/"
+        org-journal-dir "e:/Dropbox/Documents/Journal/"
+    )
+    (setq
+        local-org-data-directory "~/Dropbox/Documents/Org/"
+        org-journal-dir "~/Dropbox/Documents/Journal/"
+    )
 )
 
 ;; org-journal
 (setq
-    org-journal-dir "~/Dropbox/Documents/Journal/"
     org-journal-file-format "%Y%m%d.org")
 ;; orgmode
 (setq

@@ -85,8 +85,9 @@
 (init-load (expand-file-name "org.el" local-emacs-dotfiles-dir))
 ;;(init-load (expand-file-name "ido.el" local-emacs-dotfiles-dir))
 (init-load (expand-file-name "helm.el" local-emacs-dotfiles-dir))
-(init-load (expand-file-name custom-file local-emacs-dotfiles-dir))
-
+(unless (eq system-type 'windows-nt)
+  (init-load custom-file) ;; don't load custom-file for windows, i don't know why it fails
+  )
 ;; load any system and user specific files
 (dolist (dir (list host-default-dir host-specific-dir user-default-dir user-specific-dir))
   (when (file-exists-p dir)
