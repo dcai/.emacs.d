@@ -78,9 +78,15 @@
 
 ;; create custom file is not exists
 (write-region "" nil custom-file)
+(init-load (expand-file-name "package.el" local-emacs-dotfiles-dir))
+
+;; load any system and user specific files
+(dolist (dir (list host-default-dir host-specific-dir user-default-dir user-specific-dir))
+  (when (file-exists-p dir)
+    (add-to-list 'load-path dir)
+    (mapc #'load (directory-files dir nil ".*el$"))))
 
 ;; load plugin config
-(init-load (expand-file-name "package.el" local-emacs-dotfiles-dir))
 (init-load (expand-file-name "evil.el" local-emacs-dotfiles-dir))
 (init-load (expand-file-name "org.el" local-emacs-dotfiles-dir))
 ;;(init-load (expand-file-name "ido.el" local-emacs-dotfiles-dir))
@@ -88,8 +94,3 @@
 (unless (eq system-type 'windows-nt)
   (init-load custom-file) ;; don't load custom-file for windows, i don't know why it fails
   )
-;; load any system and user specific files
-(dolist (dir (list host-default-dir host-specific-dir user-default-dir user-specific-dir))
-  (when (file-exists-p dir)
-    (add-to-list 'load-path dir)
-    (mapc #'load (directory-files dir nil ".*el$"))))
