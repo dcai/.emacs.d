@@ -9,7 +9,6 @@
 
 (setq package-list '(
                       use-package
-                      ;;auctex
                       )
   )
 

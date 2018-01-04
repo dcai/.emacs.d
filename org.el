@@ -44,9 +44,10 @@
 (use-package org
   :ensure t
   :config
-  (use-package timesheet
-    :ensure t
-    )
+  ;; timesheet requires auctex which is a big package
+  ;;(use-package timesheet
+  ;;  :ensure t
+  ;;  )
   (use-package org-journal
     :ensure t
     :config
