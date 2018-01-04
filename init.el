@@ -6,7 +6,8 @@
 
 ;; Some custom consts
 (setq
-  local-emacs-dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name))
+  ;; local-emacs-dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name))
+  local-emacs-dotfiles-dir "~/.emacs.d"
   ;; store emacs configs which are not tracked by git
   local-emacs-data-dir "~/.local/share/emacs"
   )
