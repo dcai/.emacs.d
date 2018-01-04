@@ -2,30 +2,37 @@
 (setq
   package-user-dir (expand-file-name "packages" local-emacs-data-dir)
   package-archives '(
-        ("gnu" . "http://elpa.gnu.org/packages/")
-        ("org" . "http://orgmode.org/elpa/")
-        ("melpa" . "http://melpa.org/packages/")))
+                      ("gnu" . "http://elpa.gnu.org/packages/")
+                      ("org" . "http://orgmode.org/elpa/")
+                      ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
-; (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
-; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-; (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
-; (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
 (setq package-list '(
-		     gruvbox-theme
-		     helm
-		     php-mode
-		     org-evil
-		     org-journal
-		     evil
-		     ;;evil-leader
-		     fzf
-		     org
-		     ;;timesheet
-		     ;;auctex
-		     )
-      )
+                      use-package
+                      php-mode
+                      fzf
+                      ;;timesheet
+                      ;;auctex
+                      )
+  )
+
+;;(use-package highlight-chars
+;;  :config
+;;  (progn
+;;    (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
+;;    ))
+
+(use-package blank-mode
+  :ensure t
+  :config
+  (setq
+    blank-tab 'underline
+    ))
+
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
 
 ;; fetch the list of packages available
 (unless package-archive-contents
@@ -33,6 +40,6 @@
 
 ;; Install the missing packages
 (dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
+	(unless (package-installed-p package)
+		(package-install package)))
 ;; End of Install the missing packages

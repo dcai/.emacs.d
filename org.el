@@ -29,11 +29,31 @@
     )
 )
 
-;; org-journal
-(setq
-    org-journal-file-format "%Y%m%d.org")
-;; orgmode
-(setq
+;; (add-hook 'find-file-hook 'auto-insert)
+;; (add-to-list 'auto-mode-alist `(,(expand-file-name org-journal-dir) . journal-file-insert))
+
+(defun air-pop-to-org-agenda (split)
+  "Visit the org agenda, in the current window or a SPLIT."
+  (interactive "P")
+  (org-agenda-list)
+  (when (not split)
+    (delete-other-windows)))
+
+
+
+(use-package org
+  :ensure t
+  :config
+  (use-package org-journal
+    :ensure t
+    :config
+
+    ;; org-journal
+    (setq
+      org-journal-file-format "%Y%m%d.org")
+    )
+  ;; orgmode
+  (setq
     org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "CANCELED"))
     org-modules (append org-modules '(org-habit))
     org-startup-folded nil
@@ -47,37 +67,27 @@
     org-clock-persist-file (expand-file-name "org-clock-save.el" local-emacs-data-dir)
     org-clock-persist 'history)
 
-(setq org-capture-templates
-  '(
-    ;;("j" "journal" entry (file (get-journal-file-today)) "* Event: %?\n  %i")
-    ("j" "journal" entry (file (get-journal-file-today)) "* %(format-time-string org-journal-time-format)%i%?")
-    ("t" "todo"    entry (file org-default-notes-file) "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-    ("r" "respond" entry (file org-default-notes-file) "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-    ("n" "note"    entry (file org-default-notes-file) "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-    ;;("j" "Journal" entry (file+datetree org-default-journal-file) "* %?\n%U\n" :clock-in t :clock-resume t)
-    ("m" "Meeting" entry (file org-default-notes-file) "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-    ("h" "Habit"   entry (file org-default-notes-file)
-	"* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")
-    ("w" "org-protocol" entry (file org-default-notes-file) "* TODO Review %c\n%U\n" :immediate-finish t)
+  (setq org-capture-templates
+    '(
+       ;;("j" "journal" entry (file (get-journal-file-today)) "* Event: %?\n  %i")
+       ("j" "journal" entry (file (get-journal-file-today)) "* %(format-time-string org-journal-time-format)%i%?")
+       ("t" "todo"    entry (file org-default-notes-file) "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+       ("r" "respond" entry (file org-default-notes-file) "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+       ("n" "note"    entry (file org-default-notes-file) "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+       ;;("j" "Journal" entry (file+datetree org-default-journal-file) "* %?\n%U\n" :clock-in t :clock-resume t)
+       ("m" "Meeting" entry (file org-default-notes-file) "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+       ("h" "Habit"   entry (file org-default-notes-file)
+         "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")
+       ("w" "org-protocol" entry (file org-default-notes-file) "* TODO Review %c\n%U\n" :immediate-finish t)
+       )
+    )
+  ;; Standard key bindings
+  (global-set-key "\C-cl" 'org-store-link)
+  ;; org-agenda
+  (global-set-key (kbd "<f12>") 'org-agenda)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cb" 'org-iswitchb)
+  ;; I use C-c c to start capture mode
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (define-key global-map (kbd "C-c t a") 'air-pop-to-org-agenda)
   )
-)
-;; Standard key bindings
-(global-set-key "\C-cl" 'org-store-link)
-;; org-agenda
-(global-set-key (kbd "<f12>") 'org-agenda)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-;; I use C-c c to start capture mode
-(global-set-key (kbd "C-c c") 'org-capture)
-
-;; (add-hook 'find-file-hook 'auto-insert)
-;; (add-to-list 'auto-mode-alist `(,(expand-file-name org-journal-dir) . journal-file-insert))
-
-(defun air-pop-to-org-agenda (split)
-  "Visit the org agenda, in the current window or a SPLIT."
-  (interactive "P")
-  (org-agenda-list)
-  (when (not split)
-    (delete-other-windows)))
-
-(define-key global-map (kbd "C-c t a") 'air-pop-to-org-agenda)
