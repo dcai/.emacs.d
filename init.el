@@ -72,6 +72,8 @@
   user-default-dir (file-name-as-directory (expand-file-name "default" users-dir))
   user-specific-dir (file-name-as-directory (expand-file-name user-login-name users-dir)))
 
+(load custom-file)
+
 ;; open recent files
 (recentf-mode 1)
 ;; end of open recent files
@@ -108,6 +110,3 @@
 (init-load (expand-file-name "org.el" local-emacs-dotfiles-dir))
 ;;(init-load (expand-file-name "ido.el" local-emacs-dotfiles-dir))
 (init-load (expand-file-name "helm.el" local-emacs-dotfiles-dir))
-(unless (eq system-type 'windows-nt)
-  (init-load custom-file) ;; don't load custom-file for windows, i don't know why it fails
-  )
