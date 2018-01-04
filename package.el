@@ -9,19 +9,26 @@
 
 (setq package-list '(
                       use-package
-                      php-mode
-                      fzf
-                      ;;timesheet
                       ;;auctex
                       )
   )
+
+;; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; Install the missing packages
+(dolist (package package-list)
+	(unless (package-installed-p package)
+		(package-install package)))
+;; End of Install the missing packages
 
 ;;(use-package highlight-chars
 ;;  :config
 ;;  (progn
 ;;    (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
 ;;    ))
-
+;
 (use-package blank-mode
   :ensure t
   :config
@@ -33,13 +40,3 @@
   :ensure t
   :config
   (editorconfig-mode 1))
-
-;; fetch the list of packages available
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; Install the missing packages
-(dolist (package package-list)
-	(unless (package-installed-p package)
-		(package-install package)))
-;; End of Install the missing packages

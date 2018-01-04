@@ -1,12 +1,7 @@
-
 (use-package evil
   :ensure t
   :config
   (evil-mode 1)
-
-  (use-package org-evil
-    :ensure t
-    )
 
   (use-package evil-leader
     :ensure t
@@ -26,14 +21,19 @@
       )
     )
 
-  (use-package evil-org
+  (use-package let-alist
     :ensure t
-    :after org
     :config
-    (add-hook 'org-mode-hook 'evil-org-mode)
-    (add-hook 'evil-org-mode-hook
-      (lambda ()
-        (evil-org-set-key-theme))))
+    (use-package evil-org
+      :ensure t
+      :after org
+      :config
+      (add-hook 'org-mode-hook 'evil-org-mode)
+      (add-hook 'evil-org-mode-hook
+        (lambda ()
+          (evil-org-set-key-theme))))
+    )
+
   (use-package evil-surround
     :ensure t
     :config
