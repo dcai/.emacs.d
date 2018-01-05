@@ -7,10 +7,7 @@
                       ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
-(setq package-list '(
-                      use-package
-                      )
-  )
+(setq package-list '(use-package))
 
 ;; fetch the list of packages available
 (unless package-archive-contents
@@ -20,6 +17,21 @@
 (dolist (package package-list)
 	(unless (package-installed-p package)
 		(package-install package)))
+(use-package yasnippet
+  :ensure t
+  :config
+  (use-package yasnippet-snippets
+    :ensure t
+    )
+  (setq yas-snippet-dirs
+    (append yas-snippet-dirs
+      (list (expand-file-name "snippets" my-emacs-dotfiles-dir))
+      )
+    )
+  (yas-global-mode 1)
+  (add-hook 'prog-mode-hook #'yas-minor-mode)
+  )
+
 ;; End of Install the missing packages
 
 ;;(use-package highlight-chars
