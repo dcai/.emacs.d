@@ -68,7 +68,7 @@
     org-default-notes-file (expand-file-name "refile.org" local-org-data-directory)
     org-agenda-files (list local-org-data-directory)
     org-default-journal-file 'get-journal-file-today
-    org-clock-persist-file (expand-file-name "org-clock-save.el" local-emacs-data-dir)
+    org-clock-persist-file (expand-file-name "org-clock-save.el" my-emacs-data-dir)
     org-clock-persist 'history)
 
   (setq org-capture-templates
