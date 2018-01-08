@@ -1,3 +1,6 @@
+;; https://github.com/bbatsov/projectile/issues/989
+(setq projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" my-emacs-data-dir))
+
 (use-package helm
   :ensure t
   :config
@@ -20,6 +23,10 @@
   (use-package helm-ls-git
     :ensure t)
 
+  (use-package helm-ag
+    :ensure t
+    )
+
   (global-set-key (kbd "C-c h") 'helm-command-prefix)
   (global-unset-key (kbd "C-x c"))
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
@@ -33,4 +40,16 @@
     (define-key emacs-lisp-mode-map       [remap completion-at-point] 'helm-lisp-completion-at-point))
   (add-hook 'kill-emacs-hook #'(lambda () (and (file-exists-p "$CONF_FILE") (delete-file "$CONF_FILE"))))
 
+  )
+
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-mode)
+  (use-package helm-projectile
+    :ensure t
+    :after helm
+    :config
+    (helm-projectile-on)
+    )
   )

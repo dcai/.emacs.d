@@ -13,8 +13,12 @@
     ;; (global-set-key (kbd "SPC f s") 'save-buffer)
 
     (evil-leader/set-key
+      "." 'helm-projectile-ag
+      "qq" 'save-buffers-kill-emacs
+      "." 'helm-projectile-ag
       "qq" 'save-buffers-kill-emacs
       "ff" 'find-file
+      "ff" 'helm-projectile-find-file
       "fr" 'recentf-open-files
       "fs" 'save-buffer
       "bd" 'kill-this-buffer
@@ -33,7 +37,7 @@
       "cp" 'evilnc-comment-or-uncomment-paragraphs
       "cr" 'comment-or-uncomment-region
       "cv" 'evilnc-toggle-invert-comment-line-by-line
-      "."  'evilnc-copy-and-comment-operator
+      ;; "."  'evilnc-copy-and-comment-operator
       "\\" 'evilnc-comment-operator ; if you prefer backslash key
       )
     )

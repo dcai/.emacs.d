@@ -109,4 +109,5 @@
 (init-load (expand-file-name "evil.el" my-emacs-dotfiles-dir))
 (init-load (expand-file-name "org.el" my-emacs-dotfiles-dir))
 ;;(init-load (expand-file-name "ido.el" my-emacs-dotfiles-dir))
+;; helm+projectile
 (init-load (expand-file-name "helm.el" my-emacs-dotfiles-dir))
