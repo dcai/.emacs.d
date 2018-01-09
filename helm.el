@@ -26,6 +26,11 @@
   (use-package helm-ag
     :ensure t
     )
+  (use-package helm-projectile
+    :ensure t
+    :config
+    (helm-projectile-on)
+    )
 
   (global-set-key (kbd "C-c h") 'helm-command-prefix)
   (global-unset-key (kbd "C-x c"))
@@ -45,11 +50,11 @@
 (use-package projectile
   :ensure t
   :config
-  (projectile-mode)
-  (use-package helm-projectile
-    :ensure t
-    :after helm
-    :config
-    (helm-projectile-on)
+  :after helm
+  (projectile-global-mode)
+  (setq
+    projectile-switch-project-action 'helm-projectile
+    projectile-completion-system 'helm
+    projectile-indexing-method 'alien
     )
   )

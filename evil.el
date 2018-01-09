@@ -13,12 +13,12 @@
     ;; (global-set-key (kbd "SPC f s") 'save-buffer)
 
     (evil-leader/set-key
+      "feR" 'reload-init-file
       "." 'helm-projectile-ag
       "qq" 'save-buffers-kill-emacs
-      "." 'helm-projectile-ag
-      "qq" 'save-buffers-kill-emacs
-      "ff" 'find-file
-      "ff" 'helm-projectile-find-file
+      ;; "ff" 'find-file
+      ;; "ff" 'helm-projectile-find-file
+      "ff" 'helm-projectile
       "fr" 'recentf-open-files
       "fs" 'save-buffer
       "bd" 'kill-this-buffer

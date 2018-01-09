@@ -14,6 +14,7 @@
   (package-refresh-contents))
 
 ;; Install the missing packages
+;; TODO refresh package contents when missing packages
 (dolist (package package-list)
 	(unless (package-installed-p package)
 		(package-install package)))
@@ -46,6 +47,29 @@
   (setq
     blank-tab 'underline
     ))
+
+(use-package xterm-color
+  :ensure t
+  )
+
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+  (use-package company-tern
+    :ensure t
+    :config
+    (add-to-list 'company-backends 'company-tern)
+    )
+  )
+
+(use-package smex
+  :ensure t
+  )
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; This is your old M-x.
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 (use-package editorconfig
   :ensure t
