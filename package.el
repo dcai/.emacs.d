@@ -75,3 +75,7 @@
   :ensure t
   :config
   (editorconfig-mode 1))
+
+(use-package magit
+  :ensure t
+  )
