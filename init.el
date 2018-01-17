@@ -8,7 +8,7 @@
 (defconst my-emacs-dotfiles-dir "~/.emacs.d" "emacs config home")
 (defconst my-emacs-data-dir "~/.local/share/emacs" "store emacs configs which are not tracked by git")
 (defconst my-emacs-tmp-dir (expand-file-name (format "emacs%d" (user-uid)) my-emacs-data-dir))
-(defconst my-init-verbose nil "message before each loaded file")
+(defconst my-init-verbose t "message before each loaded file")
 (defconst my-hostname (system-name))
 (defconst my-hosts-dir (file-name-as-directory (expand-file-name "hosts" my-emacs-dotfiles-dir)))
 (defconst my-users-dir (file-name-as-directory (expand-file-name "users" my-emacs-dotfiles-dir)))
@@ -75,7 +75,7 @@
   (write-region "" nil custom-file)
   )
 
-(load custom-file)
+;(load custom-file)
 
 ;; open recent files
 (recentf-mode 1)
@@ -88,12 +88,24 @@
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
 
-(init-load (expand-file-name "package.el" my-emacs-dotfiles-dir))
-
-;; load any system and user specific files
+;; load any site specific files before package.el
+;; because it may contains proxy settings
 (dolist (dir (list
                my-host-default-dir
                my-host-specific-dir
+               )
+          )
+  (when (file-exists-p dir)
+    (add-to-list 'load-path dir)
+    (when my-init-verbose
+      (message (format "=> init-dir %s <=" dir))
+      )
+    (mapc #'load (directory-files dir nil ".*el$"))))
+
+(init-load (expand-file-name "package.el" my-emacs-dotfiles-dir))
+
+;; load any user specific files
+(dolist (dir (list
                my-user-default-dir
                my-user-specific-dir
                )

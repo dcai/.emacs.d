@@ -18,17 +18,6 @@
   (let ((daily-name (format-time-string org-journal-file-format)))
     (expand-file-name daily-name org-journal-dir)))
 
-(if (eq system-type 'windows-nt)
-    (setq
-        local-org-data-directory "e:/Dropbox/Documents/Org/"
-        org-journal-dir "e:/Dropbox/Documents/Journal/"
-    )
-    (setq
-        local-org-data-directory "~/Dropbox/Documents/Org/"
-        org-journal-dir "~/Dropbox/Documents/Journal/"
-    )
-)
-
 ;; (add-hook 'find-file-hook 'auto-insert)
 ;; (add-to-list 'auto-mode-alist `(,(expand-file-name org-journal-dir) . journal-file-insert))
 
@@ -65,8 +54,8 @@
     org-duration-format (quote h:mm)
     org-log-done t
     org-tag-alist '(("@work" . ?w) ("@home" . ?h))
-    org-default-notes-file (expand-file-name "refile.org" local-org-data-directory)
-    org-agenda-files (list local-org-data-directory)
+    org-default-notes-file (expand-file-name "refile.org" my-org-data-directory)
+    org-agenda-files (list my-org-data-directory)
     org-default-journal-file 'get-journal-file-today
     org-clock-persist-file (expand-file-name "org-clock-save.el" my-emacs-data-dir)
     org-clock-persist 'history)

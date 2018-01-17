@@ -9,6 +9,7 @@
     )
 
   (when (eq system-type 'windows-nt)
+    (set-face-attribute 'default nil :height 145)
     (set-face-attribute 'default nil :family "Consolas")
     )
   )
