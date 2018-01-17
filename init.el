@@ -87,6 +87,7 @@
 
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
+(show-paren-mode 1)
 
 ;; load any site specific files before package.el
 ;; because it may contains proxy settings
@@ -123,3 +124,4 @@
 ;;(init-load (expand-file-name "ido.el" my-emacs-dotfiles-dir))
 ;; helm+projectile
 (init-load (expand-file-name "helm.el" my-emacs-dotfiles-dir))
+(init-load (expand-file-name "projectile.el" my-emacs-dotfiles-dir))

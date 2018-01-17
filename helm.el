@@ -1,6 +1,3 @@
-;; https://github.com/bbatsov/projectile/issues/989
-(setq projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" my-emacs-data-dir))
-
 (use-package helm
   :ensure t
   :config
@@ -26,11 +23,6 @@
   (use-package helm-ag
     :ensure t
     )
-  (use-package helm-projectile
-    :ensure t
-    :config
-    (helm-projectile-on)
-    )
 
   (global-set-key (kbd "C-c h") 'helm-command-prefix)
   (global-unset-key (kbd "C-x c"))
@@ -45,17 +37,4 @@
     (define-key emacs-lisp-mode-map       [remap completion-at-point] 'helm-lisp-completion-at-point))
   (add-hook 'kill-emacs-hook #'(lambda () (and (file-exists-p "$CONF_FILE") (delete-file "$CONF_FILE"))))
 
-  )
-
-(use-package projectile
-  :ensure t
-  :after helm
-  :config
-  (projectile-global-mode)
-  (setq
-    projectile-generic-command "ag -g"
-    projectile-switch-project-action 'helm-projectile
-    projectile-completion-system 'helm
-    projectile-indexing-method 'alien
-    )
   )
