@@ -63,6 +63,10 @@
     )
   )
 
+(use-package rjsx-mode
+  :ensure t
+  )
+
 (use-package smex
   :ensure t
   )
