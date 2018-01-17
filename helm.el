@@ -49,10 +49,11 @@
 
 (use-package projectile
   :ensure t
-  :config
   :after helm
+  :config
   (projectile-global-mode)
   (setq
+    projectile-generic-command "ag -g"
     projectile-switch-project-action 'helm-projectile
     projectile-completion-system 'helm
     projectile-indexing-method 'alien

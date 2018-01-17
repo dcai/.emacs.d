@@ -17,8 +17,8 @@
       "." 'helm-projectile-ag
       "qq" 'save-buffers-kill-emacs
       ;; "ff" 'find-file
-      ;; "ff" 'helm-projectile-find-file
-      "ff" 'helm-projectile
+      "ff" 'helm-projectile-find-file
+      ;; "ff" 'helm-projectile
       "fr" 'recentf-open-files
       "fs" 'save-buffer
       "bd" 'kill-this-buffer
