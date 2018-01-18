@@ -45,6 +45,7 @@
 
 ;; emacs config
 (setq
+  url-cache-directory (expand-file-name "url-cache/" my-emacs-data-dir)
   custom-file (expand-file-name "custom.el" my-emacs-data-dir)
   ;; scroll one line at a time (less "jumpy" than defaults)
   mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time
