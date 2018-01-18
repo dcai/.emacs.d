@@ -28,8 +28,6 @@
   (when (not split)
     (delete-other-windows)))
 
-
-
 (use-package org
   :ensure t
   :config
