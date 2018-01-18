@@ -83,3 +83,14 @@
 (use-package magit
   :ensure t
   )
+(use-package avy
+  :ensure t
+  )
+(use-package emmet-mode
+  :ensure t
+  )
+(use-package prettier-js
+  :ensure t
+  :config
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+  )
