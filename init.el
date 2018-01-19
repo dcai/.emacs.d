@@ -57,6 +57,7 @@
   tab-width 4
   indent-tabs-mode nil
   ;; end: no tab
+  column-number-mode t
   make-backup-file nil
   ;; store all backup and autosave files in the tmp dir
   backup-directory-alist `((".*" . , my-emacs-tmp-dir))

@@ -18,6 +18,10 @@
 (dolist (package package-list)
 	(unless (package-installed-p package)
 		(package-install package)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;   Start to load other plugins
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package yasnippet
   :ensure t
   :config
@@ -69,11 +73,12 @@
 
 (use-package smex
   :ensure t
+  :config
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+  ;; This is your old M-x.
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
   )
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-;; This is your old M-x.
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 (use-package editorconfig
   :ensure t
@@ -91,12 +96,17 @@
 (use-package magit
   :ensure t
   )
+
 (use-package avy
   :ensure t
+  :config
+  (global-set-key (kbd "C-:") 'avy-goto-char)
   )
+
 (use-package emmet-mode
   :ensure t
   )
+
 (use-package prettier-js
   :ensure t
   :config

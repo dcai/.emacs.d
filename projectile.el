@@ -1,6 +1,6 @@
 ;; https://github.com/bbatsov/projectile/issues/989
 (setq
-  projectile-enable-caching t
+  ;; projectile-enable-caching t
   projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" my-emacs-data-dir)
   projectile-cache-file  (expand-file-name "projectile.cache" my-emacs-data-dir)
   )
@@ -11,7 +11,8 @@
   :config
   (projectile-global-mode)
   (setq
-    projectile-generic-command "ag -g"
+    ;; projectile-generic-command "rg --files"
+    projectile-generic-command "ag --no-color -g"
     projectile-switch-project-action 'helm-projectile
     projectile-completion-system 'helm
     projectile-indexing-method 'alien
