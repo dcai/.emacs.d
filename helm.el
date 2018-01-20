@@ -18,6 +18,21 @@
   (define-key global-map [remap dabbrev-expand] 'helm-dabbrev)
   (define-key global-map [remap execute-extended-command] 'helm-M-x)
 
+  (use-package helm-flx
+    :ensure t
+    :config
+    (helm-flx-mode +1)
+    (setq
+      helm-flx-for-helm-find-files t ;; t by default
+      helm-flx-for-helm-locate t) ;; nil by default
+    )
+
+  (use-package helm-fuzzier
+    :ensure t
+    :config
+    (helm-fuzzier-mode 1)
+    )
+
   (use-package helm-ls-git
     :ensure t)
 
