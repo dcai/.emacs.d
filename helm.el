@@ -1,5 +1,6 @@
 (use-package helm
   :ensure t
+  :diminish helm-mode
   :config
   (require 'helm-config)
 

@@ -7,6 +7,7 @@
 
 (use-package projectile
   :ensure t
+  :diminish projectile-mode
   :after helm
   :config
   (projectile-global-mode)

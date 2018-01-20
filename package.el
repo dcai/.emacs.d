@@ -58,6 +58,7 @@
 
 (use-package company
   :ensure t
+  :diminish company-mode
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (use-package company-tern
@@ -65,10 +66,6 @@
     :config
     (add-to-list 'company-backends 'company-tern)
     )
-  )
-
-(use-package rjsx-mode
-  :ensure t
   )
 
 (use-package smex
@@ -82,6 +79,7 @@
 
 (use-package editorconfig
   :ensure t
+  :diminish editorconfig-mode
   :config
   (editorconfig-mode 1))
 
@@ -103,12 +101,22 @@
   (global-set-key (kbd "C-:") 'avy-goto-char)
   )
 
-(use-package emmet-mode
+(use-package rjsx-mode
   :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
   )
 
 (use-package prettier-js
   :ensure t
   :config
   (add-hook 'js2-mode-hook 'prettier-js-mode)
+  )
+
+(use-package diminish
+  :ensure t
+  :config
+  (diminish 'emacs-lisp-mode)
+  (diminish 'undo-tree-mode)
+  (diminish 'auto-revert-mode)
   )
