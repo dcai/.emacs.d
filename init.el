@@ -65,7 +65,7 @@
   auto-save-list-file-prefix my-emacs-tmp-dir
   nsm-settings-file (expand-file-name "network-security.data" my-emacs-data-dir)
   recentf-save-file (expand-file-name "recentf" my-emacs-data-dir)
-  recentf-max-menu-items 25
+  recentf-max-menu-items 200
   bookmark-default-file (expand-file-name "bookmarks" my-emacs-data-dir)
   )
 ;; create data dir if not exists
