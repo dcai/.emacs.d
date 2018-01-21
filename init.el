@@ -92,7 +92,7 @@
 (set-language-environment "UTF-8")
 (show-paren-mode 1)
 
-;; load any site specific files before package.el
+;; load any site specific files before user config
 ;; because it may contains proxy settings
 (dolist (dir (list
                my-host-default-dir
@@ -105,8 +105,6 @@
       (message (format "=> init-dir %s <=" dir))
       )
     (mapc #'load (directory-files dir nil ".*el$"))))
-
-(init-load (expand-file-name "package.el" my-emacs-dotfiles-dir))
 
 ;; load any user specific files
 (dolist (dir (list
@@ -122,9 +120,8 @@
     (mapc #'load (directory-files dir nil ".*el$"))))
 
 ;; load plugin config
-(init-load (expand-file-name "evil.el" my-emacs-dotfiles-dir))
-(init-load (expand-file-name "org.el" my-emacs-dotfiles-dir))
-;;(init-load (expand-file-name "ido.el" my-emacs-dotfiles-dir))
-;; helm+projectile
-(init-load (expand-file-name "helm.el" my-emacs-dotfiles-dir))
-(init-load (expand-file-name "projectile.el" my-emacs-dotfiles-dir))
+;; (init-load (expand-file-name "evil.el" my-emacs-dotfiles-dir))
+;; (init-load (expand-file-name "org.el" my-emacs-dotfiles-dir))
+;; (init-load (expand-file-name "ido.el" my-emacs-dotfiles-dir))
+;; (init-load (expand-file-name "helm.el" my-emacs-dotfiles-dir))
+;; (init-load (expand-file-name "projectile.el" my-emacs-dotfiles-dir))
