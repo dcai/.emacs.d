@@ -68,6 +68,7 @@
   recentf-max-menu-items 200
   bookmark-default-file (expand-file-name "bookmarks" my-emacs-data-dir)
   )
+(add-to-list 'recentf-exclude (format "%s/elpa/.*" my-emacs-data-dir))
 ;; create data dir if not exists
 (unless (file-exists-p my-emacs-data-dir)
   (make-directory my-emacs-data-dir t))
