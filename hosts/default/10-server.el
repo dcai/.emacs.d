@@ -11,7 +11,5 @@
   server-name "main-server"   ;;Server mutex file name
   )
 
-(unless (file-exists-p server-auth-dir)
-  (make-directory server-auth-dir))
-
+(my-mkdir server-auth-dir)
 ;; (server-start)

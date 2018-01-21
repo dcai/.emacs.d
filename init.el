@@ -21,6 +21,12 @@
   (interactive)
   (load-file user-init-file))
 
+(defun my-mkdir(dir)
+  (unless (file-exists-p dir)
+    (make-directory dir t))
+)
+
+
 ;; init-load function
 (defun init-load (filename &optional noerror)
   "Load FILENAME and provide message when my-init-verbose passing in optional NOERROR."
@@ -75,8 +81,7 @@
 ;; end of open recent files
 
 ;; create data dir if not exists
-(unless (file-exists-p my-emacs-data-dir)
-  (make-directory my-emacs-data-dir t))
+(my-mkdir my-emacs-data-dir)
 
 ;; create custom file is not exists
 (unless (file-exists-p custom-file)
@@ -93,6 +98,12 @@
 (set-language-environment "UTF-8")
 (show-paren-mode 1)
 
+(defun my-load-dir(dir)
+  (when (file-exists-p dir)
+    (add-to-list 'load-path dir)
+    (mapc #'load (directory-files dir nil ".*el$")))
+  )
+
 ;; load any site specific files before user config
 ;; because it may contains proxy settings
 (dolist (dir (list
@@ -100,12 +111,8 @@
                my-host-specific-dir
                )
           )
-  (when (file-exists-p dir)
-    (add-to-list 'load-path dir)
-    (when my-init-verbose
-      (message (format "=> init-dir %s <=" dir))
-      )
-    (mapc #'load (directory-files dir nil ".*el$"))))
+  (my-load-dir dir)
+ )
 
 ;; load any user specific files
 (dolist (dir (list
@@ -113,13 +120,8 @@
                my-user-specific-dir
                )
           )
-  (when (file-exists-p dir)
-    (add-to-list 'load-path dir)
-    (when my-init-verbose
-      (message (format "=> init-dir %s <=" dir))
-      )
-    (mapc #'load (directory-files dir nil ".*el$"))))
-
+  (my-load-dir dir)
+  )
 ;; load plugin config
 ;; (init-load (expand-file-name "evil.el" my-emacs-dotfiles-dir))
 ;; (init-load (expand-file-name "org.el" my-emacs-dotfiles-dir))
