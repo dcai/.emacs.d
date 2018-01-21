@@ -68,7 +68,12 @@
   recentf-max-menu-items 200
   bookmark-default-file (expand-file-name "bookmarks" my-emacs-data-dir)
   )
-(add-to-list 'recentf-exclude (format "%s/elpa/.*" my-emacs-data-dir))
+
+;; open recent files
+(recentf-mode 1)
+(add-to-list 'recentf-exclude my-emacs-data-dir)
+;; end of open recent files
+
 ;; create data dir if not exists
 (unless (file-exists-p my-emacs-data-dir)
   (make-directory my-emacs-data-dir t))
@@ -79,10 +84,6 @@
   )
 
 ;(load custom-file)
-
-;; open recent files
-(recentf-mode 1)
-;; end of open recent files
 
 (global-set-key (kbd "C-x C-l") 'reload-init-file)
 (global-set-key (kbd "C-l") 'list-buffers)
