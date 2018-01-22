@@ -16,8 +16,8 @@
 ;; Install the missing packages
 ;; TODO refresh package contents when missing packages
 (dolist (package package-list)
-	(unless (package-installed-p package)
-		(package-install package)))
+  (unless (package-installed-p package)
+    (package-install package)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;   Start to load other plugins
@@ -44,7 +44,7 @@
 ;;  (progn
 ;;    (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
 ;;    ))
-;
+
 (use-package blank-mode
   :ensure t
   :config
@@ -129,6 +129,7 @@
     )
 
   )
+
 (use-package diminish
   :ensure t
   :config

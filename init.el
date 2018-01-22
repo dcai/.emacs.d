@@ -24,7 +24,13 @@
 (defun my-mkdir(dir)
   (unless (file-exists-p dir)
     (make-directory dir t))
-)
+  )
+
+;; https://www.emacswiki.org/emacs/ReformatBuffer
+(defun my-format-buffer ()
+  (interactive)
+  (save-excursion
+    (indent-region (point-min) (point-max) nil)))
 
 
 ;; init-load function
@@ -88,8 +94,6 @@
   (write-region "" nil custom-file)
   )
 
-;(load custom-file)
-
 (global-set-key (kbd "C-x C-l") 'reload-init-file)
 (global-set-key (kbd "C-l") 'list-buffers)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
@@ -112,7 +116,7 @@
                )
           )
   (my-load-dir dir)
- )
+  )
 
 ;; load any user specific files
 (dolist (dir (list
