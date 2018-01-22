@@ -12,6 +12,14 @@
     ;; (global-set-key (kbd "SPC") nil) ;; Remove the old keybinding
     ;; (global-set-key (kbd "SPC f s") 'save-buffer)
 
+    ;; treat underscore as part of the word
+    ;; https://emacs.stackexchange.com/a/9584/18022
+    (defadvice evil-inner-word (around underscore-as-word activate)
+      (let ((table (copy-syntax-table (syntax-table))))
+        (modify-syntax-entry ?_ "w" table)
+        (with-syntax-table table
+          ad-do-it)))
+
     (evil-leader/set-key
       "feR" 'reload-init-file
       "." 'helm-projectile-ag
