@@ -100,6 +100,7 @@
 
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
 (show-paren-mode 1)
 
 (defun my-load-dir(dir)
