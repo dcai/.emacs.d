@@ -83,7 +83,7 @@
 
 ;; open recent files
 (recentf-mode 1)
-(add-to-list 'recentf-exclude my-emacs-data-dir)
+(add-to-list 'recentf-exclude (expand-file-name my-emacs-data-dir))
 ;; end of open recent files
 
 ;; create data dir if not exists
