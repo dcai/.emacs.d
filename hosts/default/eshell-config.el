@@ -24,6 +24,13 @@ directory to make multiple eshell windows easier."
 
 (global-set-key (kbd "C-`") 'my-eshell-here)
 
+(defun eshell-mode-hook-func ()
+  (setq eshell-path-env (concat "/usr/local/bin:" eshell-path-env))
+  (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
+  )
+
+(add-hook 'eshell-mode-hook 'eshell-mode-hook-func)
+
 (defalias 'vim 'find-file)
 (defalias 'vi 'find-file)
 (defalias 'edit 'find-file)
