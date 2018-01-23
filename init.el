@@ -113,13 +113,6 @@
 (dolist (dir (list
                my-host-default-dir
                my-host-specific-dir
-               )
-          )
-  (my-load-dir dir)
-  )
-
-;; load any user specific files
-(dolist (dir (list
                my-user-default-dir
                my-user-specific-dir
                )
