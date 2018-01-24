@@ -57,6 +57,8 @@
 
 ;; emacs config
 (setq
+  ;; gc threshold 200MB
+  gc-cons-threshold 200000000
   url-cache-directory (expand-file-name "url-cache/" my-emacs-data-dir)
   custom-file (expand-file-name "custom.el" my-emacs-data-dir)
   ;; scroll one line at a time (less "jumpy" than defaults)

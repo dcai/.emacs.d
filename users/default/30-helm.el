@@ -38,6 +38,26 @@
 
   (use-package helm-ag
     :ensure t
+    :config
+    (custom-set-variables
+      ;; '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+      '(helm-ag-base-command "rg --no-heading --ignore-case")
+      '(helm-ag-command-option "--all-text")
+      '(helm-ag-insert-at-point 'symbol)
+      )
+
+    ;; patch helm-projectile-ag to support rg
+    ;; without this patch, helm-projectile-ag passes invalid `--ignore` arg to rg
+    (defun helm-projectile-ag (&optional options)
+      "Helm version of projectile-ag."
+      (interactive (if current-prefix-arg (list (read-string "option: " "" 'helm-ag--extra-options-history))))
+      (if (require 'helm-ag nil  'noerror)
+        (if (projectile-project-p)
+          (let ((helm-ag-command-option options)
+                 (current-prefix-arg nil))
+            (helm-do-ag (projectile-project-root) (car (projectile-parse-dirconfig-file))))
+          (error "You're not in a project"))
+        (error "helm-ag not available")))
     )
 
   (global-set-key (kbd "C-c h") 'helm-command-prefix)
