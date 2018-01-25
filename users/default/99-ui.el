@@ -19,3 +19,23 @@
   :config
   (load-theme 'gruvbox-dark-medium t)
   )
+
+;; https://github.com/emacs-jp/replace-colorthemes
+;; (use-package color-theme-modern
+;;   :ensure t
+;;   :config
+;;   (load-theme 'desert t t)
+;;   (enable-theme 'desert)
+;;   )
+
+;; (use-package emojify
+;;   :ensure t
+;;   :config
+;;   (add-hook 'after-init-hook #'global-emojify-mode)
+;;   )
+
+;; (use-package mode-icons
+;;   :ensure t
+;;   :config
+;;   (mode-icons-mode)
+;;   )
