@@ -1,6 +1,6 @@
 ;;; package --- Summary:
 ;;; Commentary:
-;; http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html
+;; Copied from: http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html
 ;; if (aspell installed) { use aspell}
 ;; else if (hunspell installed) { use hunspell }
 ;; whatever spell checker I use, I always use English dictionary
@@ -54,6 +54,8 @@
     (ispell-kill-ispell t)
     ))
 
+(setq flyspell-issue-message-flag nil)
+
 (defadvice flyspell-auto-correct-word (around my-flyspell-auto-correct-word activate)
   (let ((old-ispell-extra-args ispell-extra-args))
     (ispell-kill-ispell t)
@@ -75,6 +77,25 @@
   :init
   (global-flycheck-mode)
   )
+
+
+;; {{ flyspell setup for js2-mode
+(defun js-flyspell-verify ()
+  (let* ((f (get-text-property (- (point) 1) 'face)))
+    ;; *whitelist*
+    ;; only words with following font face will be checked
+    (memq f '(js2-function-call
+               js2-function-param
+               js2-object-property
+               font-lock-variable-name-face
+               font-lock-string-face
+               font-lock-function-name-face
+               font-lock-builtin-face
+               rjsx-tag
+               rjsx-attr))))
+(put 'js2-mode 'flyspell-mode-predicate 'js-flyspell-verify)
+(put 'rjsx-mode 'flyspell-mode-predicate 'js-flyspell-verify)
+;; }}
 
 (provide '99-spellcheck)
 ;;; 99-spellcheck.el ends here
