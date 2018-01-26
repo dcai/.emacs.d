@@ -55,10 +55,12 @@
        (tab-mark 9 [9655 9] [92 9]) ; tab
        )))
 
+(defvar best-gc-cons-threshold 4000000 "Best default gc threshold value.  Should't be too big.")
+;; don't GC during startup to save time
+(setq gc-cons-threshold most-positive-fixnum)
+
 ;; emacs config
 (setq
-  ;; gc threshold 200MB
-  gc-cons-threshold 200000000
   url-cache-directory (expand-file-name "url-cache/" my-emacs-data-dir)
   custom-file (expand-file-name "custom.el" my-emacs-data-dir)
   ;; scroll one line at a time (less "jumpy" than defaults)
@@ -107,6 +109,8 @@
 (show-paren-mode 1)
 
 (defun my-load-dir(dir)
+  "Load .el files from a directory"
+  (interactive)
   (when (file-exists-p dir)
     (add-to-list 'load-path dir)
     (mapc #'load (directory-files dir nil ".*el$")))
