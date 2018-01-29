@@ -37,7 +37,7 @@
 (use-package hippie-exp
   :ensure nil
   :defer t
-  :bind ("<tab>" . hippie-expand)
+  :bind ("<C-tab>" . hippie-expand)
   :config
   (setq-default hippie-expand-try-functions-list
     '(yas-hippie-try-expand emmet-expand-line)))
