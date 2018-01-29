@@ -3,6 +3,16 @@
   :config
   (evil-mode 1)
 
+  (use-package evil-mc
+    :ensure t
+    :config
+
+    (use-package evil-mc-extras
+      :ensure t
+      )
+    (global-evil-mc-mode  1) ;; enable
+    )
+
   (use-package evil-leader
     :ensure t
     :config
