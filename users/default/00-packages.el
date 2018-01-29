@@ -151,10 +151,27 @@
   (global-set-key (kbd "C-:") 'avy-goto-char)
   )
 
+(use-package js2-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+  )
+
 (use-package rjsx-mode
   :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+  )
+
+(use-package multiple-cursors
+  :ensure t
+  )
+
+(use-package js2-refactor
+  :ensure t
+  :config
+  (add-hook 'js2-mode-hook #'js2-refactor-mode)
+  (js2r-add-keybindings-with-prefix "C-c C-m")
   )
 
 (use-package prettier-js
