@@ -200,6 +200,8 @@
   (diminish 'emacs-lisp-mode)
   (diminish 'undo-tree-mode)
   (diminish 'auto-revert-mode)
+  (diminish 'flycheck-mode)
+  (diminish 'evil-mc-mode)
   )
 
 (use-package shell-switcher
