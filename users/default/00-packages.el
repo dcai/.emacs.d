@@ -201,3 +201,9 @@
   (diminish 'undo-tree-mode)
   (diminish 'auto-revert-mode)
   )
+
+(use-package shell-switcher
+  :ensure t
+  :config
+  (shell-switcher-mode)
+  )
