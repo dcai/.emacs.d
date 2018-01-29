@@ -14,19 +14,19 @@
     )
   )
 
-(use-package gruvbox-theme
-  :ensure t
-  :config
-  (load-theme 'gruvbox-dark-medium t)
-  )
-
-;; https://github.com/emacs-jp/replace-colorthemes
-;; (use-package color-theme-modern
+;; (use-package gruvbox-theme
 ;;   :ensure t
 ;;   :config
-;;   (load-theme 'desert t t)
-;;   (enable-theme 'desert)
+;;   (load-theme 'gruvbox-dark-medium t)
 ;;   )
+
+;; https://github.com/emacs-jp/replace-colorthemes
+(use-package color-theme-modern
+  :ensure t
+  :config
+  (load-theme 'clarity t t)
+  (enable-theme 'clarity)
+  )
 
 ;; (use-package emojify
 ;;   :ensure t
