@@ -13,7 +13,7 @@
   (projectile-global-mode)
   (setq
     ;; projectile-generic-command "rg --files"
-    projectile-generic-command "ag --no-color -g"
+    ;; projectile-generic-command "ag --no-color -g"
     projectile-switch-project-action 'helm-projectile
     projectile-completion-system 'helm
     projectile-indexing-method 'alien
@@ -24,6 +24,20 @@
   :ensure t
   :config
   (helm-projectile-on)
+
+  ;; This depends on `helm-ag-base-command` option defined for helm-ag plugin
+  ;; patch helm-projectile-ag to support rg
+  ;; without this patch, helm-projectile-ag passes invalid `--ignore` arg to rg
+  (defun helm-projectile-ag (&optional options)
+    "Helm version of projectile-ag."
+    (interactive (if current-prefix-arg (list (read-string "option: " "" 'helm-ag--extra-options-history))))
+    (if (require 'helm-ag nil  'noerror)
+      (if (projectile-project-p)
+        (let ((helm-ag-command-option options)
+               (current-prefix-arg nil))
+          (helm-do-ag (projectile-project-root) (car (projectile-parse-dirconfig-file))))
+        (error "You're not in a project"))
+      (error "Error: helm-ag not available")))
   )
 
 (defun my-invalidate-cache ()

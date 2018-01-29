@@ -4,7 +4,8 @@
   :config
   (require 'helm-config)
 
-  (setq helm-split-window-in-side-p       t ; open helm buffer inside current window, not occupy whole other window
+  (setq
+    helm-split-window-inside-p            t ; open helm buffer inside current window, not occupy whole other window
     helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
     helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
     helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
@@ -45,19 +46,6 @@
       '(helm-ag-command-option "--all-text")
       '(helm-ag-insert-at-point 'symbol)
       )
-
-    ;; patch helm-projectile-ag to support rg
-    ;; without this patch, helm-projectile-ag passes invalid `--ignore` arg to rg
-    (defun helm-projectile-ag (&optional options)
-      "Helm version of projectile-ag."
-      (interactive (if current-prefix-arg (list (read-string "option: " "" 'helm-ag--extra-options-history))))
-      (if (require 'helm-ag nil  'noerror)
-        (if (projectile-project-p)
-          (let ((helm-ag-command-option options)
-                 (current-prefix-arg nil))
-            (helm-do-ag (projectile-project-root) (car (projectile-parse-dirconfig-file))))
-          (error "You're not in a project"))
-        (error "helm-ag not available")))
     )
 
   (global-set-key (kbd "C-c h") 'helm-command-prefix)
