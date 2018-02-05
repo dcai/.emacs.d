@@ -23,6 +23,14 @@
 ;;;;;;   Start to load other plugins
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package diminish
+  :ensure t
+  :config
+  (diminish 'emacs-lisp-mode)
+  (diminish 'undo-tree-mode)
+  (diminish 'auto-revert-mode)
+  )
+
 (use-package s
   :ensure t
   )
@@ -182,7 +190,7 @@
 
 (use-package prettier-js
   :ensure t
-  :config
+  :init
   (add-hook 'js2-mode-hook 'prettier-js-mode)
   (add-hook 'json-mode-hook 'prettier-js-mode)
   )
@@ -193,22 +201,12 @@
   (dashboard-setup-startup-hook)
   (setq
     dashboard-items '(
-                       (recents . 5)
                        (projects . 10)
+                       (recents . 5)
                        (bookmarks . 5)
                        )
     )
 
-  )
-
-(use-package diminish
-  :ensure t
-  :config
-  (diminish 'emacs-lisp-mode)
-  (diminish 'undo-tree-mode)
-  (diminish 'auto-revert-mode)
-  (diminish 'flycheck-mode)
-  (diminish 'evil-mc-mode)
   )
 
 (use-package shell-switcher
