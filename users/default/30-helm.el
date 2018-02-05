@@ -45,10 +45,10 @@
 
       (cond
         ((executable-find "rg")
-          '(helm-ag-base-command "rg --no-heading --vimgrep --ignore-case")
+          '(helm-ag-base-command "rg --vimgrep --ignore-case")
           )
         ((executable-find "ag")
-          '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+          '(helm-ag-base-command "ag --vimgrep --ignore-case")
           )
         )
 
