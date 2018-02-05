@@ -151,6 +151,12 @@
   (global-set-key (kbd "C-:") 'avy-goto-char)
   )
 
+(use-package json-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.babelrc\\'" . json-mode))
+  )
+
 (use-package js2-mode
   :ensure t
   :config
@@ -178,6 +184,7 @@
   :ensure t
   :config
   (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'json-mode-hook 'prettier-js-mode)
   )
 
 (use-package dashboard
