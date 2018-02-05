@@ -119,6 +119,15 @@
     (mapc #'load (directory-files dir nil ".*el$")))
   )
 
+
+;; maybe try this:
+;; https://gist.github.com/dotemacs/1427240
+(defun my-add-to-mode (mode &rest files)
+  "Map MODE to FILES."
+  (dolist (file files)
+    (add-to-list 'auto-mode-alist
+      (cons file mode))))
+
 ;; load any site specific files before user config
 ;; because it may contains proxy settings
 (dolist (dir (list

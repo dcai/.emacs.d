@@ -162,7 +162,12 @@
 (use-package json-mode
   :ensure t
   :config
-  (add-to-list 'auto-mode-alist '("\\.babelrc\\'" . json-mode))
+  (my-add-to-mode 'json-mode
+    "\\.babelrc$"
+    "\\.eslintrc$"
+    "\\.prettierrc$"
+    "\\.tern-project$"
+    )
   )
 
 (use-package js2-mode
