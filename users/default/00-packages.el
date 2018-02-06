@@ -203,6 +203,14 @@
   (add-hook 'json-mode-hook 'prettier-js-mode)
   )
 
+(use-package smartparens
+  :ensure t
+  :delight
+  :config
+  (add-hook 'prog-mode-hook #'smartparens-mode)
+  (add-hook 'rjsx-mode-hook #'smartparens-mode)
+  )
+
 (use-package dashboard
   :delight
   :ensure t
