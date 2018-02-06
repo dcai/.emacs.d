@@ -72,13 +72,4 @@
        ("w" "org-protocol" entry (file org-default-notes-file) "* TODO Review %c\n%U\n" :immediate-finish t)
        )
     )
-  ;; Standard key bindings
-  (global-set-key "\C-cl" 'org-store-link)
-  ;; org-agenda
-  (global-set-key (kbd "<f12>") 'org-agenda)
-  (global-set-key "\C-ca" 'org-agenda)
-  (global-set-key "\C-cb" 'org-iswitchb)
-  ;; I use C-c c to start capture mode
-  (global-set-key (kbd "C-c c") 'org-capture)
-  (define-key global-map (kbd "C-c t a") 'air-pop-to-org-agenda)
   )

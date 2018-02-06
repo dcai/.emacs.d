@@ -18,6 +18,7 @@
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
+;; End of Install the missing packages
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;   Start to load other plugins
@@ -79,8 +80,6 @@
 
   )
 
-;; End of Install the missing packages
-
 ;;(use-package highlight-chars
 ;;  :config
 ;;  (progn
@@ -89,7 +88,7 @@
 
 (use-package blank-mode
   :ensure t
-  :config
+  :init
   (setq
     blank-tab 'underline
     ))

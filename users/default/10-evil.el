@@ -10,7 +10,7 @@
     (use-package evil-mc-extras
       :ensure t
       )
-    (global-evil-mc-mode  1) ;; enable
+    (global-evil-mc-mode  1)
     )
 
   (use-package evil-leader
@@ -18,9 +18,6 @@
     :config
     (evil-leader/set-leader "<SPC>")
     (global-evil-leader-mode)
-    ;; (global-set-key (kbd "SPC f f") 'fzf)
-    ;; (global-set-key (kbd "SPC") nil) ;; Remove the old keybinding
-    ;; (global-set-key (kbd "SPC f s") 'save-buffer)
 
     ;; treat underscore as part of the word
     ;; https://emacs.stackexchange.com/a/9584/18022
@@ -29,19 +26,8 @@
         (modify-syntax-entry ?_ "w" table)
         (with-syntax-table table
           ad-do-it)))
-
-    (evil-leader/set-key
-      "feR" 'reload-init-file
-      "." 'helm-projectile-ag
-      "qq" 'save-buffers-kill-emacs
-      ;; "ff" 'find-file
-      "ff" 'helm-projectile-find-file
-      ;; "ff" 'helm-projectile
-      "fr" 'recentf-open-files
-      "fs" 'save-buffer
-      "bd" 'kill-this-buffer
-      )
     )
+
   (use-package evil-nerd-commenter
     :ensure t
     :after evil-leader

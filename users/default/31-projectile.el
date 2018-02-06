@@ -1,23 +1,19 @@
-;; https://github.com/bbatsov/projectile/issues/989
-(setq
-  ;; projectile-enable-caching t
-  projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" my-emacs-data-dir)
-  projectile-cache-file  (expand-file-name "projectile.cache" my-emacs-data-dir)
-  )
-
 (use-package projectile
   :ensure t
   :diminish projectile-mode
   :after helm
-  :config
-  (projectile-global-mode)
+  :init
   (setq
-    ;; projectile-generic-command "rg --files"
-    ;; projectile-generic-command "ag --no-color -g"
     projectile-switch-project-action 'helm-projectile
     projectile-completion-system 'helm
     projectile-indexing-method 'alien
+    ;; options above should set before plugin loaded, see link below:
+    ;; https://github.com/bbatsov/projectile/issues/989
+    projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" my-emacs-data-dir)
+    projectile-cache-file  (expand-file-name "projectile.cache" my-emacs-data-dir)
     )
+  :config
+  (projectile-global-mode)
   )
 
 (use-package helm-projectile
@@ -25,8 +21,8 @@
   :config
   (helm-projectile-on)
 
-  ;; This depends on `helm-ag-base-command` option defined for helm-ag plugin
-  ;; patch helm-projectile-ag to support rg
+  ;; This depends on `helm-ag-base-command' option defined for `helm-ag' plugin
+  ;; patch `helm-projectile-ag' to support `rg'
   ;; without this patch, helm-projectile-ag passes invalid `--ignore` arg to rg
   (defun helm-projectile-ag (&optional options)
     "Helm version of projectile-ag."

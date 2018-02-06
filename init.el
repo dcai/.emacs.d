@@ -102,10 +102,6 @@
   (write-region "" nil custom-file)
   )
 
-(global-set-key (kbd "C-x C-l") 'reload-init-file)
-(global-set-key (kbd "C-l") 'list-buffers)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
