@@ -1,6 +1,6 @@
 (use-package projectile
   :ensure t
-  :diminish projectile-mode
+  :delight projectile-mode
   :after helm
   :init
   (setq

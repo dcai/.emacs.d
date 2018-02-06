@@ -73,7 +73,7 @@
 (add-hook 'text-mode-hook 'text-mode-hook-setup)
 
 (use-package flycheck
-  :diminish flycheck-mode
+  :delight flycheck-mode
   :ensure t
   :init
   (global-flycheck-mode)

@@ -1,6 +1,6 @@
 (use-package helm
   :ensure t
-  :diminish helm-mode
+  :delight helm-mode
   :config
 
   (helm-mode 1)

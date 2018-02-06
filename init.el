@@ -8,10 +8,10 @@
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;; (defconst my-emacs-dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
-(defconst my-emacs-dotfiles-dir "~/.emacs.d" "emacs config home")
-(defconst my-emacs-data-dir "~/.local/share/emacs" "store emacs configs which are not tracked by git")
+(defconst my-emacs-dotfiles-dir "~/.emacs.d" "Emacs config home.")
+(defconst my-emacs-data-dir "~/.local/share/emacs" "Store Emacs configs which are not tracked by git.")
 (defconst my-emacs-tmp-dir (expand-file-name (format "emacs%d" (user-uid)) my-emacs-data-dir))
-(defconst my-init-verbose t "message before each loaded file")
+(defconst my-init-verbose t "Message before each loaded file.")
 (defconst my-hostname (system-name))
 (defconst my-hosts-dir (file-name-as-directory (expand-file-name "hosts" my-emacs-dotfiles-dir)))
 (defconst my-users-dir (file-name-as-directory (expand-file-name "users" my-emacs-dotfiles-dir)))
@@ -21,6 +21,7 @@
 (defconst my-user-specific-dir (file-name-as-directory (expand-file-name user-login-name my-users-dir)))
 
 (defun reload-init-file ()
+  "Reload Emacs init.el."
   (interactive)
   (load-file user-init-file))
 
@@ -31,6 +32,7 @@
 
 ;; https://www.emacswiki.org/emacs/ReformatBuffer
 (defun my-format-buffer ()
+  "Format entire buffer."
   (interactive)
   (save-excursion
     (indent-region (point-min) (point-max) nil)))

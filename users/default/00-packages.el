@@ -24,13 +24,15 @@
 ;;;;;;   Start to load other plugins
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package diminish
+(use-package delight
   :ensure t
-  :config
-  (diminish 'emacs-lisp-mode)
-  (diminish 'undo-tree-mode)
-  (diminish 'auto-revert-mode)
   )
+
+(use-package autorevert
+  :delight auto-revert-mode)
+
+(use-package undo-tree
+  :delight undo-tree-mode)
 
 (use-package s
   :ensure t
@@ -65,19 +67,19 @@
   :init
   (add-hook 'js-mode-hook 'yas-minor-mode)
   (add-hook 'sgml-mode-hook 'yas-minor-mode)
+
   :config
+  (setq yas-snippet-dirs
+    (append yas-snippet-dirs
+      (list (expand-file-name "snippets" my-emacs-dotfiles-dir))
+      )
+    )
   (use-package yasnippet-snippets
     :ensure t
     )
   (yas-reload-all)
   (unbind-key "TAB" yas-minor-mode-map)
   (unbind-key "<tab>" yas-minor-mode-map)
-  (setq yas-snippet-dirs
-    (append yas-snippet-dirs
-      (list (expand-file-name "snippets" my-emacs-dotfiles-dir))
-      )
-    )
-
   )
 
 ;;(use-package highlight-chars
@@ -99,7 +101,7 @@
 
 (use-package company
   :ensure t
-  :diminish company-mode
+  :delight company-mode
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (use-package company-tern
@@ -123,7 +125,7 @@
 
 (use-package editorconfig
   :ensure t
-  :diminish editorconfig-mode
+  :delight editorconfig-mode
   :config
   (editorconfig-mode 1))
 
@@ -186,6 +188,7 @@
   )
 
 (use-package js2-refactor
+  :delight
   :ensure t
   :config
   (add-hook 'js2-mode-hook #'js2-refactor-mode)
@@ -193,6 +196,7 @@
   )
 
 (use-package prettier-js
+  :delight
   :ensure t
   :init
   (add-hook 'js2-mode-hook 'prettier-js-mode)
@@ -200,6 +204,7 @@
   )
 
 (use-package dashboard
+  :delight
   :ensure t
   :config
   (dashboard-setup-startup-hook)

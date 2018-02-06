@@ -4,7 +4,7 @@
   (evil-mode 1)
 
   (use-package evil-mc
-    :diminish evil-mc-mode
+    :delight evil-mc-mode
     :ensure t
     :config
     (use-package evil-mc-extras
