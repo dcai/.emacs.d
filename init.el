@@ -11,6 +11,8 @@
 (defconst my-emacs-dotfiles-dir "~/.emacs.d" "Emacs config home.")
 (defconst my-emacs-data-dir "~/.local/share/emacs" "Store Emacs configs which are not tracked by git.")
 (defconst my-emacs-tmp-dir (expand-file-name (format "emacs%d" (user-uid)) my-emacs-data-dir))
+(defconst my-emacs-backup-dir (expand-file-name "backup" my-emacs-tmp-dir))
+(defconst my-emacs-autosave-dir (expand-file-name "autosave" my-emacs-tmp-dir))
 (defconst my-init-verbose t "Message before each loaded file.")
 (defconst my-hostname (system-name))
 (defconst my-hosts-dir (file-name-as-directory (expand-file-name "hosts" my-emacs-dotfiles-dir)))
@@ -89,9 +91,9 @@
   make-backup-file nil
   temporary-file-directory my-emacs-tmp-dir
   ;; store all backup and autosave files in the tmp dir
-  backup-directory-alist `((".*" . , my-emacs-tmp-dir))
-  auto-save-file-name-transforms `((".*", my-emacs-tmp-dir t))
-  auto-save-list-file-prefix my-emacs-tmp-dir
+  backup-directory-alist `((".*" . , my-emacs-backup-dir))
+  auto-save-file-name-transforms `((".*", my-emacs-autosave-dir t))
+  auto-save-list-file-prefix my-emacs-autosave-dir
   nsm-settings-file (expand-file-name "network-security.data" my-emacs-data-dir)
   recentf-save-file (expand-file-name "recentf" my-emacs-data-dir)
   recentf-max-menu-items 200
@@ -106,6 +108,8 @@
 
 ;; create data dir if not exists
 (my-mkdir my-emacs-data-dir)
+(my-mkdir my-emacs-backup-dir)
+(my-mkdir my-emacs-autosave-dir)
 
 ;; create custom file is not exists
 (unless (file-exists-p custom-file)

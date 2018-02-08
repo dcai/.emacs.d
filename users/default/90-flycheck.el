@@ -54,8 +54,6 @@
     (ispell-kill-ispell t)
     ))
 
-(setq flyspell-issue-message-flag nil)
-
 (defadvice flyspell-auto-correct-word (around my-flyspell-auto-correct-word activate)
   (let ((old-ispell-extra-args ispell-extra-args))
     (ispell-kill-ispell t)
@@ -71,14 +69,16 @@
   "Turn off RUN-TOGETHER option when spell check `text-mode`."
   (setq-local ispell-extra-args (flyspell-detect-ispell-args)))
 (add-hook 'text-mode-hook 'text-mode-hook-setup)
+(setq
+  flycheck-temp-prefix (file-name-as-directory (expand-file-name "flycheck_temp" my-emacs-tmp-dir))
+  flyspell-issue-message-flag nil)
 
 (use-package flycheck
   :delight flycheck-mode
   :ensure t
-  :init
+  :config
   (global-flycheck-mode)
   )
-
 
 ;; {{ flyspell setup for js2-mode
 (defun js-flyspell-verify ()
@@ -97,6 +97,3 @@
 (put 'js2-mode 'flyspell-mode-predicate 'js-flyspell-verify)
 (put 'rjsx-mode 'flyspell-mode-predicate 'js-flyspell-verify)
 ;; }}
-
-(provide '99-spellcheck)
-;;; 99-spellcheck.el ends here
