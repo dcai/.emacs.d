@@ -4,23 +4,34 @@
 ;; You may delete these explanatory comments.
 ;; (package-initialize)
 
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-(setq exec-path (append exec-path '("/usr/local/bin")))
+(defun my-add-to-path (path)
+  "Add PATH to Emacs environment PATH."
+  (setenv "PATH" (concat (getenv "PATH") (format ":%s" path)))
+    (setq exec-path (append exec-path (list path))))
 
-;; (defconst my-emacs-dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
-(defconst my-emacs-dotfiles-dir "~/.emacs.d" "Emacs config home.")
-(defconst my-emacs-data-dir "~/.local/share/emacs" "Store Emacs configs which are not tracked by git.")
-(defconst my-emacs-tmp-dir (expand-file-name (format "emacs%d/" (user-uid)) my-emacs-data-dir))
-(defconst my-emacs-backup-dir (expand-file-name "backup/" my-emacs-tmp-dir))
-(defconst my-emacs-autosave-dir (expand-file-name "autosave/" my-emacs-tmp-dir))
+(my-add-to-path "/usr/local/bin")
+
+(defun my-expand-dir (dir base)
+  "Populate DIR in BASE."
+  (file-name-as-directory (expand-file-name dir base))
+  )
+
 (defconst my-init-verbose t "Message before each loaded file.")
+;; (defconst my-emacs-dotfiles-dir
+;;   (file-name-directory (or (buffer-file-name) load-file-name)))
+(defconst my-emacs-dotfiles-dir "~/.emacs.d" "Emacs config home.")
+(defconst my-emacs-data-dir "~/.local/share/emacs/" "Store Emacs data.")
 (defconst my-hostname (system-name))
-(defconst my-hosts-dir (file-name-as-directory (expand-file-name "hosts" my-emacs-dotfiles-dir)))
-(defconst my-users-dir (file-name-as-directory (expand-file-name "users" my-emacs-dotfiles-dir)))
-(defconst my-host-default-dir (file-name-as-directory (expand-file-name "default" my-hosts-dir)))
-(defconst my-host-specific-dir (file-name-as-directory (expand-file-name my-hostname my-hosts-dir)))
-(defconst my-user-default-dir (file-name-as-directory (expand-file-name "default" my-users-dir)))
-(defconst my-user-specific-dir (file-name-as-directory (expand-file-name user-login-name my-users-dir)))
+(defconst my-hosts-dir (my-expand-dir "hosts/" my-emacs-dotfiles-dir))
+(defconst my-users-dir (my-expand-dir "users" my-emacs-dotfiles-dir))
+(defconst my-host-default-dir (my-expand-dir "default" my-hosts-dir))
+(defconst my-host-specific-dir (my-expand-dir my-hostname my-hosts-dir))
+(defconst my-user-default-dir (my-expand-dir "default" my-users-dir))
+(defconst my-user-specific-dir (my-expand-dir user-login-name my-users-dir))
+(defconst my-emacs-tmp-dir
+  (my-expand-dir (format "emacs%d/" (user-uid)) my-emacs-data-dir))
+(defconst my-emacs-backup-dir (my-expand-dir "backup/" my-emacs-tmp-dir))
+(defconst my-emacs-autosave-dir (my-expand-dir "autosave/" my-emacs-tmp-dir))
 
 ;; https://www.emacswiki.org/emacs/ReformatBuffer
 (defun my-reformat-buffer ()
@@ -34,9 +45,15 @@
   (interactive)
   (load-file user-init-file))
 
-(defun my-mkdir(dir)
-  (unless (file-exists-p dir)
-    (make-directory dir t))
+(defun my-mkdir (&rest dirs)
+  "Create DIRS if not exists."
+  (dolist (dir dirs)
+    (unless (file-exists-p dir)
+      (when my-init-verbose
+        (message (format "=> Create directory: %s" dir))
+        )
+      (make-directory dir t))
+    )
   )
 
 ;; https://www.emacswiki.org/emacs/ReformatBuffer
@@ -45,7 +62,6 @@
   (interactive)
   (save-excursion
     (indent-region (point-min) (point-max) nil)))
-
 
 ;; init-load function
 (defun init-load (filename &optional noerror)
@@ -107,9 +123,10 @@
 ;; end of open recent files
 
 ;; create data dir if not exists
-(my-mkdir my-emacs-data-dir)
-(my-mkdir my-emacs-backup-dir)
-(my-mkdir my-emacs-autosave-dir)
+(my-mkdir
+  my-emacs-data-dir
+  my-emacs-backup-dir
+  my-emacs-autosave-dir)
 
 ;; create custom file is not exists
 (unless (file-exists-p custom-file)

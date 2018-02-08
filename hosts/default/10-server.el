@@ -7,7 +7,7 @@
                                                  ; on windows.
 
 (setq
-  server-auth-dir (expand-file-name "server" my-emacs-data-dir)
+  server-auth-dir (my-expand-dir "server/" my-emacs-data-dir)
   server-name "main-server"   ;;Server mutex file name
   )
 
