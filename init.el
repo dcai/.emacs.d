@@ -20,6 +20,13 @@
 (defconst my-user-default-dir (file-name-as-directory (expand-file-name "default" my-users-dir)))
 (defconst my-user-specific-dir (file-name-as-directory (expand-file-name user-login-name my-users-dir)))
 
+;; https://www.emacswiki.org/emacs/ReformatBuffer
+(defun my-reformat-buffer ()
+  "Reformat current buffer."
+  (interactive)
+  (save-excursion
+    (indent-region (point-min) (point-max) nil)))
+
 (defun reload-init-file ()
   "Reload Emacs init.el."
   (interactive)

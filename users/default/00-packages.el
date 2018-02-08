@@ -231,3 +231,15 @@
   :config
   (shell-switcher-mode)
   )
+
+(use-package lispy
+  :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+  (use-package evil-lispy
+    :ensure t
+    :config
+    (add-hook 'emacs-lisp-mode-hook #'evil-lispy-mode)
+    (add-hook 'clojure-mode-hook #'evil-lispy-mode)
+    )
+  )
