@@ -5,6 +5,8 @@
 (global-set-key (kbd "C-c h") 'helm-command-prefix)
 (global-unset-key (kbd "C-x c"))
 
+;; https://emacs.stackexchange.com/a/36248/18022
+;; C-c d Delete buffer without leaving helm
 (define-key global-map [remap find-file] 'helm-find-files)
 (define-key global-map [remap recentf-open-files] 'helm-recentf)
 (define-key global-map [remap occur] 'helm-occur)
@@ -13,9 +15,12 @@
 (define-key global-map [remap list-buffers] 'helm-mini)
 ;; (define-key global-map [remap list-buffers] 'helm-buffers-list)
 
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
-(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+;; rebind tab to run persistent action
+;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+;; make TAB work in terminal
+;; (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+;; list actions using C-z
+;; (define-key helm-map (kbd "C-z")  'helm-select-action)
 
 (evil-leader/set-key
   "feR" 'reload-init-file
