@@ -24,6 +24,7 @@
 
 (evil-leader/set-key
   "feR" 'reload-init-file
+  "pp" 'helm-projectile-switch-project
   "qq" 'save-buffers-kill-emacs
   "fs" 'save-buffer
   "bd" 'kill-this-buffer

@@ -11,7 +11,7 @@
     ;; https://github.com/bbatsov/projectile/issues/989
     projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" my-emacs-data-dir)
     projectile-enable-caching t
-    projectile-cache-file  (expand-file-name "projectile.cache" my-emacs-data-dir)
+    projectile-cache-file (expand-file-name "projectile.cache" my-emacs-data-dir)
     )
   :config
   (projectile-global-mode)
