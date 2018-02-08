@@ -87,6 +87,7 @@
   ;; end: no tab
   column-number-mode t
   make-backup-file nil
+  temporary-file-directory my-emacs-tmp-dir
   ;; store all backup and autosave files in the tmp dir
   backup-directory-alist `((".*" . , my-emacs-tmp-dir))
   auto-save-file-name-transforms `((".*", my-emacs-tmp-dir t))
