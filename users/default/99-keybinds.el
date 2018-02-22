@@ -1,6 +1,7 @@
 (global-set-key (kbd "C-x C-l") 'reload-init-file)
 (global-set-key (kbd "C-l") 'list-buffers)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
+(global-set-key "\C-x\ \C-b" 'eval-buffer)
 
 (global-set-key (kbd "C-c h") 'helm-command-prefix)
 (global-unset-key (kbd "C-x c"))
