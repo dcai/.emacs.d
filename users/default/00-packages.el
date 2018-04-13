@@ -88,13 +88,12 @@
 ;;    (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
 ;;    ))
 
-(use-package blank-mode
-  :ensure t
-  :init
-  (setq
-    blank-tab 'underline
-    ))
-
+; (use-package blank-mode
+  ; :ensure t
+  ; :init
+  ; (setq
+    ; blank-tab 'underline
+    ; ))
 (use-package xterm-color
   :ensure t
   )
@@ -175,6 +174,7 @@
   :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+  (setq-default js2-strict-trailing-comma-warning nil)
   )
 
 (use-package rjsx-mode
