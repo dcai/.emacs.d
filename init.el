@@ -91,6 +91,7 @@
 
 ;; emacs config
 (setq
+  create-lockfiles nil
   url-cache-directory (expand-file-name "url-cache/" my-emacs-data-dir)
   custom-file (expand-file-name "custom.el" my-emacs-data-dir)
   ;; scroll one line at a time (less "jumpy" than defaults)
