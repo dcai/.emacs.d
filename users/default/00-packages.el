@@ -82,22 +82,6 @@
   (unbind-key "<tab>" yas-minor-mode-map)
   )
 
-;;(use-package highlight-chars
-;;  :config
-;;  (progn
-;;    (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
-;;    ))
-
-; (use-package blank-mode
-  ; :ensure t
-  ; :init
-  ; (setq
-    ; blank-tab 'underline
-    ; ))
-(use-package xterm-color
-  :ensure t
-  )
-
 (use-package company
   :ensure t
   :delight company-mode
@@ -107,18 +91,6 @@
     :ensure t
     :config
     (add-to-list 'company-backends 'company-tern)
-    )
-  )
-
-(use-package smex
-  :ensure t
-  :config
-  (global-set-key (kbd "M-x") 'smex)
-  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-  ;; This is your old M-x.
-  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-  (setq
-    smex-save-file (expand-file-name "smex-items" my-emacs-data-dir)
     )
   )
 
@@ -192,7 +164,7 @@
   :ensure t
   :config
   (add-hook 'js2-mode-hook #'js2-refactor-mode)
-  (js2r-add-keybindings-with-prefix "C-c C-m")
+  (js2r-add-keybindings-with-prefix "C-c C-j")
   )
 
 (use-package prettier-js
@@ -226,20 +198,50 @@
 
   )
 
-(use-package shell-switcher
-  :ensure t
-  :config
-  (shell-switcher-mode)
-  )
 
-(use-package lispy
+(use-package yaml-mode
   :ensure t
   :config
-  (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-  (use-package evil-lispy
-    :ensure t
-    :config
-    (add-hook 'emacs-lisp-mode-hook #'evil-lispy-mode)
-    (add-hook 'clojure-mode-hook #'evil-lispy-mode)
-    )
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+  (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+
+  (add-hook 'yaml-mode-hook
+    '(lambda ()
+       (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
   )
+;;(use-package highlight-chars
+;;  :config
+;;  (progn
+;;    (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
+;;    ))
+;; (use-package blank-mode
+;;   :ensure t
+;;   :init
+;;   (setq
+;;     blank-tab 'underline
+;;     ))
+;; (use-package xterm-color
+;;   :ensure t
+;;   )
+;; (use-package smex
+;;   :ensure t
+;;   :config
+;;   (global-set-key (kbd "M-x") 'smex)
+;;   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;;   ;; This is your old M-x.
+;;   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+;;   (setq
+;;     smex-save-file (expand-file-name "smex-items" my-emacs-data-dir)
+;;     )
+;;   )
+;; (use-package lispy
+;;   :ensure t
+;;   :config
+;;   (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+;;   (use-package evil-lispy
+;;     :ensure t
+;;     :config
+;;     (add-hook 'emacs-lisp-mode-hook #'evil-lispy-mode)
+;;     (add-hook 'clojure-mode-hook #'evil-lispy-mode)
+;;     )
+;;   )
