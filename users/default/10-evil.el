@@ -3,6 +3,13 @@
   :config
   (evil-mode 1)
 
+  (use-package evil-escape
+    :ensure t
+    :config
+    (evil-escape-mode)
+    (setq-default evil-escape-key-sequence "jk")
+    )
+
   (use-package evil-mc
     :delight evil-mc-mode
     :ensure t

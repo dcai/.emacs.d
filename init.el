@@ -10,6 +10,7 @@
     (setq exec-path (append exec-path (list path))))
 
 (my-add-to-path "/usr/local/bin")
+(my-add-to-path "~/.npm-packages/bin")
 
 (defun my-expand-dir (dir base)
   "Populate DIR in BASE."

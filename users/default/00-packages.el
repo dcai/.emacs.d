@@ -108,6 +108,10 @@
           ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
+(use-package elm-mode
+  :ensure t
+  )
+
 (use-package magit
   :ensure t
   :config
