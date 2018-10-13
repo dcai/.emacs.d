@@ -31,8 +31,9 @@
   "bd" 'kill-this-buffer
   "." 'helm-projectile-ag
   ;; "ff" 'find-file
+  ;; "ff" 'helm-projectile-find-file
   ;; "ff" 'helm-projectile
-  "ff" 'helm-projectile-find-file
+  "ff" 'helm-ls-git-ls
   "fr" 'helm-recentf
   )
 

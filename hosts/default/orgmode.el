@@ -1,7 +1,7 @@
 (if (eq system-type 'windows-nt)
     (setq
-        my-org-data-directory "k:/Dropbox/Documents/Org/"
-        org-journal-dir "k:/Dropbox/Documents/Journal/"
+        my-org-data-directory "C:/Users/dcai/Dropbox/Documents/Org/"
+        org-journal-dir "C:/Users/dcai/Dropbox/Documents/Journal/"
     )
     (setq
         my-org-data-directory "~/Dropbox/Documents/Org/"
