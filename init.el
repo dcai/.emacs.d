@@ -3,6 +3,9 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 ;; (package-initialize)
+(setq url-proxy-services
+   '(("http" . "proxy.stgeorge.com.au:8080")
+     ("https" . "proxy.stgeorge.com.au:8080")))
 
 (defun my-add-to-path (path)
   "Add PATH to Emacs environment PATH."
