@@ -4,6 +4,11 @@
 ;; You may delete these explanatory comments.
 ;; (package-initialize)
 
+(setenv "LANG" "en_AU.UTF-8")
+(set-locale-environment "en_AU.UTF-8")
+(set-language-environment 'utf-8)
+(setq system-time-locale "C")
+
 (defun my-add-to-path (path)
   "Add PATH to Emacs environment PATH."
   (setenv "PATH" (concat (getenv "PATH") (format ":%s" path)))
