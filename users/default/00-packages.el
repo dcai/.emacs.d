@@ -42,18 +42,6 @@
   :ensure t
   )
 
-(use-package emmet-mode
-  :ensure t
-  :init
-  (add-hook 'css-mode-hook 'emmet-mode)
-  (add-hook 'sgml-mode-hook 'emmet-mode)
-  :config
-  (setq-default emmet-move-cursor-between-quote t)
-  (unbind-key "<C-return>" emmet-mode-keymap)
-  (unbind-key "C-M-<left>" emmet-mode-keymap)
-  (unbind-key "C-M-<right>" emmet-mode-keymap)
-  )
-
 (use-package hippie-exp
   :ensure nil
   :defer t
@@ -87,11 +75,6 @@
   :delight company-mode
   :config
   (add-hook 'after-init-hook 'global-company-mode)
-  (use-package company-tern
-    :ensure t
-    :config
-    (add-to-list 'company-backends 'company-tern)
-    )
   )
 
 (use-package editorconfig
@@ -107,10 +90,6 @@
           ("\\.md\\'" . markdown-mode)
           ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
-
-(use-package elm-mode
-  :ensure t
-  )
 
 (use-package magit
   :ensure t
