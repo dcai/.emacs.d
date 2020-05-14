@@ -7,7 +7,7 @@
     :ensure t
     :config
     (evil-escape-mode)
-    (setq-default evil-escape-key-sequence "jk")
+    (setq-default evil-escape-key-sequence "jj")
     )
 
   (use-package evil-mc
