@@ -42,6 +42,20 @@
   :ensure t
   )
 
+(use-package dashboard
+   :delight
+   :ensure t
+   :config
+   (dashboard-setup-startup-hook)
+   (setq
+     dashboard-items '(
+         (projects . 10)
+         (recents . 5)
+         (bookmarks . 5)
+       )
+     )
+   )
+
 (use-package hippie-exp
   :ensure nil
   :defer t
@@ -165,22 +179,6 @@
   (add-hook 'prog-mode-hook #'smartparens-mode)
   (add-hook 'rjsx-mode-hook #'smartparens-mode)
   )
-
-(use-package dashboard
-  :delight
-  :ensure t
-  :config
-  (dashboard-setup-startup-hook)
-  (setq
-    dashboard-items '(
-                       (projects . 10)
-                       (recents . 5)
-                       (bookmarks . 5)
-                       )
-    )
-
-  )
-
 
 (use-package yaml-mode
   :ensure t
