@@ -3,22 +3,21 @@
   :config
   (evil-mode 1)
 
-  (use-package evil-escape
-    :ensure t
-    :config
-    (evil-escape-mode)
-    (setq-default evil-escape-key-sequence "jj")
-    )
-
-  (use-package evil-mc
-    :delight evil-mc-mode
-    :ensure t
-    :config
-    (use-package evil-mc-extras
-      :ensure t
-      )
-    (global-evil-mc-mode  1)
-    )
+  ; (use-package evil-escape
+  ;   :ensure t
+  ;   :config
+  ;   (evil-escape-mode)
+  ;   ; (setq-default evil-escape-key-sequence "jj")
+  ;   )
+  ; (use-package evil-mc
+  ;   :delight evil-mc-mode
+  ;   :ensure t
+  ;   :config
+  ;   (use-package evil-mc-extras
+  ;     :ensure t
+  ;     )
+  ;   (global-evil-mc-mode  1)
+  ;   )
 
   (use-package evil-leader
     :ensure t
